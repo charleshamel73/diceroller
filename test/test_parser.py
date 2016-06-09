@@ -1,6 +1,8 @@
-import mock
 from unittest import TestCase
-from src.Parser import Parser
+
+import mock
+
+from src.main.Parser import Parser
 
 
 @mock.patch('random.randint', return_value=3)
@@ -35,27 +37,27 @@ class TestParser(TestCase):
 
     def test_negative_roll(self, mocked_roll):
         parser = Parser()
-        self.assertRaises(ValueError,lambda:parser.parse("-3d4"))
-        self.assertRaises(ValueError,lambda:parser.parse("3d-4"))
-        self.assertRaises(ValueError,lambda:parser.parse("-3d-4"))
+        self.assertRaises(SyntaxError,lambda:parser.parse("-3d4"))
+        self.assertRaises(SyntaxError,lambda:parser.parse("3d-4"))
+        self.assertRaises(SyntaxError,lambda:parser.parse("-3d4-4"))
 
 
     def test_mod(self,mocked_roll):
         parser = Parser()
         self.assertEqual(parser.parse("3d4"),9)
-        self.assertEqual(parser.parse("3d4k2"),6)
+        self.assertEqual(parser.parse("3d4k2H"),6)
         self.assertEqual(parser.parse("3d4r4"),9)
-        self.assertEqual(parser.parse("3d4r4k2"),6)
+        self.assertEqual(parser.parse("3d4r4k2H"),6)
 
     def test_negative_mod(self, mocked_roll):
         parser = Parser()
-        self.assertRaises(Exception,lambda: parser.parse("3d3k4r2"))
-        self.assertRaises(ValueError,lambda:parser.parse("0d4k2"))
-        self.assertRaises(ValueError,lambda:parser.parse("3d0k2"))
-        self.assertRaises(ValueError, lambda: parser.parse("3d3k0"))
-        self.assertRaises(ValueError,lambda: parser.parse("3d3k4"))
-        self.assertRaises(ValueError, lambda: parser.parse("3d3r0k2"))
-        self.assertRaises(ValueError, lambda: parser.parse("3d3r4k2"))
+        self.assertRaises(SyntaxError,lambda: parser.parse("3d3k4Hr2"))
+        self.assertRaises(ValueError,lambda:parser.parse("0d4k2H"))
+        self.assertRaises(ValueError,lambda:parser.parse("3d0k2H"))
+        self.assertRaises(ValueError, lambda: parser.parse("3d3k0L"))
+        self.assertRaises(ValueError,lambda: parser.parse("3d3k4H"))
+        self.assertRaises(ValueError, lambda: parser.parse("3d3r0k2L"))
+        self.assertRaises(ValueError, lambda: parser.parse("3d3k2Lr0"))
 
     #TODO: ADD TEST FOR SORTED SUCH THAT 3L AND 5H
     #TODO: ADD CUSTOM EXCEPTION CLASSES AND FIX TEST

@@ -1,11 +1,13 @@
-from Divide import Divide
-from Highest import Highest
-from Lowest import Lowest
-from Multiply import Multiply
-from Number import Number
-from Subtraction import Subtraction
-from Addition import Addition
-from Roll import Roll
+from src.constant.Number import Number
+from src.modifier.Highest import Highest
+from src.modifier.Lowest import Lowest
+from src.operator.Reroll import Reroll
+from src.operator.Addition import Addition
+from src.operator.Divide import Divide
+from src.operator.Keep import Keep
+from src.operator.Multiply import Multiply
+from src.operator.Roll import Roll
+from src.operator.Subtraction import Subtraction
 
 
 class NodeFactory(object):
@@ -22,20 +24,17 @@ class NodeFactory(object):
             return Divide(string)
         elif Multiply.symbol in string:
             return Multiply(string)
+        elif Keep.symbol in string:
+            return Keep(string)
+        elif Reroll.symbol in string:
+            return Reroll(string)
         elif Roll.symbol in string:
             return Roll(string)
         elif Highest.symbol in string:
             return Highest(string)
         elif Lowest.symbol in string:
             return Lowest(string)
-        else:
+        elif string != "":
             return Number(string)
-
-    @classmethod
-    def fetch_value(cls,string):
-        if Highest.symbol in string:
-            return Highest(string)
-        elif Lowest.symbol in string:
-            return Lowest(string)
         else:
-            return Number(string)
+            raise SyntaxError("PARSING ERROR: Found empty string when parsing. Roll contains a negative number")
