@@ -1,5 +1,4 @@
 from src.constant.Constant import Constant
-from src.result.Result import Result
 
 
 class Number(Constant):

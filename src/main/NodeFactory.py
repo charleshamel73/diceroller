@@ -6,8 +6,8 @@ from src.operator.Divide import Divide
 from src.operator.Multiply import Multiply
 from src.operator.Subtraction import Subtraction
 from src.roll.Diceroll import Diceroll
-from src.roll import Keep
-from src.roll import Reroll
+from src.roll.Keep import Keep
+from src.roll.Reroll import Reroll
 
 
 class NodeFactory(object):
