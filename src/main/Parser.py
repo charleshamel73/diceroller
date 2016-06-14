@@ -1,4 +1,5 @@
-from src.visitor.LogResultVisitor import ResultVisitor
+from src.visitor.CompileVisitor import CompileVisitor
+from src.visitor.LogResultVisitor import LogResultVisitor
 from src.visitor.SyntaxCheckVisitor import SyntaxVisitor
 from src.visitor.ValueCheckVisitor import ValueCheckVisitor
 
@@ -10,9 +11,8 @@ class Parser(object):
         root = NodeFactory.fetch_part(string)
         root.accept(SyntaxVisitor)
         #COMPILE
-        #TODO: CREATE EVALUATE STEP
-        #AFTER COMPILE
+        root.accept(CompileVisitor)
         root.accept(ValueCheckVisitor)
-        #TODO: RENAME RESULTVISITOR
-        test = root.accept(ResultVisitor)
+        #AFTER COMPILE
+        test = root.accept(LogResultVisitor)
         return test.sum
