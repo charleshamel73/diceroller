@@ -1,11 +1,11 @@
 from src.modifier.Highest import Highest
 from src.modifier.Lowest import Lowest
-from src.operator.Roll import Roll
-from src.operator.Operator import Operator
-from src.operator.Reroll import Reroll
+from src.roll.Diceroll import Diceroll
+from src.roll.Reroll import Reroll
+from src.roll.Roll import Roll
 
 
-class Keep(Operator):
+class Keep(Roll):
     symbol = "k"
 
     def evaluate(self):
@@ -25,7 +25,7 @@ class Keep(Operator):
     def validate(self):
         self.leftChild.validate()
         self.rightChild.validate()
-        if not isinstance(self.leftChild, (Reroll, Roll)):
+        if not isinstance(self.leftChild, (Reroll, Diceroll)):
             raise SyntaxError("KEEP SYNTAX ERROR: Expected a Dice Roll or Reroll on the left but found '%s'"%self.leftChild.string)
         if not isinstance(self.rightChild, (Highest, Lowest)):
             raise SyntaxError("KEEP SYNTAX ERROR: Expected a Highest or Lowest but found '%s'" % self.rightChild.string)

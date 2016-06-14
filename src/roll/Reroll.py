@@ -1,14 +1,12 @@
 import random
 
 from src.constant.Number import Number
-from src.operator.Roll import Roll
-from src.operator.Operator import Operator
+from src.roll.Diceroll import Diceroll
+from src.roll.Roll import Roll
 
 
-class Reroll(Operator):
+class Reroll(Roll):
     symbol = "r"
-    rolls = []
-    numberOfSides = None
 
     def evaluate(self):
         dice_roll = self.leftChild
@@ -28,7 +26,7 @@ class Reroll(Operator):
     def validate(self):
         self.leftChild.validate()
         self.rightChild.validate()
-        if not isinstance(self.leftChild, Roll):
+        if not isinstance(self.leftChild, Diceroll):
             raise SyntaxError("REROLL SYNTAX ERROR: Expected a Dice Roll but found '%s'" % self.leftChild.string)
         if not isinstance(self.rightChild, Number):
             raise SyntaxError("REROLL SYNTAX ERROR: Expected a Number but found '%s'" % self.rightChild.string)

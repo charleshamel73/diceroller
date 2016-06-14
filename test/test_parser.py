@@ -30,6 +30,10 @@ class TestParser(TestCase):
     def test_constants(self, mocked_roll):
         parser = Parser()
         self.assertEqual(parser.parse("4"), 4)
+        self.assertEqual(parser.parse("4+3"), 7)
+        self.assertEqual(parser.parse("4-3"), 1)
+        self.assertEqual(parser.parse("6/3"), 2)
+        self.assertEqual(parser.parse("4*3"), 12)
 
     def test_dice_roll(self, mocked_roll):
         parser = Parser()

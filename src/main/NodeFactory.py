@@ -1,13 +1,13 @@
 from src.constant.Number import Number
 from src.modifier.Highest import Highest
 from src.modifier.Lowest import Lowest
-from src.operator.Reroll import Reroll
 from src.operator.Addition import Addition
 from src.operator.Divide import Divide
-from src.operator.Keep import Keep
 from src.operator.Multiply import Multiply
-from src.operator.Roll import Roll
 from src.operator.Subtraction import Subtraction
+from src.roll.Diceroll import Diceroll
+from src.roll import Keep
+from src.roll import Reroll
 
 
 class NodeFactory(object):
@@ -24,12 +24,12 @@ class NodeFactory(object):
             return Divide(string)
         elif Multiply.symbol in string:
             return Multiply(string)
-        elif Keep.symbol in string:
-            return Keep(string)
-        elif Reroll.symbol in string:
-            return Reroll(string)
-        elif Roll.symbol in string:
-            return Roll(string)
+        # elif Keep.symbol in string:
+        #     return Keep(string)
+        # elif Reroll.symbol in string:
+        #     return Reroll(string)
+        elif Diceroll.symbol in string:
+            return Diceroll(string)
         elif Highest.symbol in string:
             return Highest(string)
         elif Lowest.symbol in string:

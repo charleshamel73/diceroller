@@ -1,14 +1,13 @@
 from src.constant.Constant import Constant
+from src.result.Result import Result
 
 
 class Number(Constant):
-    def evaluate(self):
-        return int(self.string)
+    value = -1
 
-    def validate(self):
-        try:
-            int(self.string)
-        except ValueError:
-            raise SyntaxError("NUMBER SYNTAX ERROR: Expected number without characters but got '%s'"%self.string)
-        if int(self.string) <= 0:
-            raise ValueError("NUMBER VALUE ERROR: Expected number greater then 0 got '%s'"%self.string)
+    def getValue(self):
+        self.value = int(self.string)
+        return self.value
+
+    def accept(self,visitor):
+        return visitor.visit(self)
