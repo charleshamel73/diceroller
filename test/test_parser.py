@@ -10,6 +10,9 @@ class TestParser(TestCase):
     def test_double_dice_roll(self, mocked_roll):
         parser = Parser()
         self.assertEqual(parser.parse("2d4+3d5"), 15)
+        self.assertEqual(parser.parse("2d4-3d5"), -3)
+        self.assertEqual(parser.parse("2d4*3d5"), 54)
+        self.assertEqual(parser.parse("4d4/2d4"), 2)
 
     def test_mulitply(self, mocked_roll):
         parser = Parser()

@@ -18,5 +18,6 @@ class Parser(object):
         root.accept(ValueCheckVisitor)
         print "LOGGING RESULTS"
         test = root.accept(LogResultVisitor)
+        print "Result of Roll: %s"%test.sum
         print ""
         return test.sum
