@@ -12,8 +12,6 @@ class Result(object):
         from src.operator.Addition import Addition
         from src.operator.Divide import Divide
         from src.operator.Subtraction import Subtraction
-        # self.rolls.append(result.rolls)
-        #TODO: FIX ROLLS.APPEND ISSUE
         if isinstance(type, Addition):
             self.sum += result.sum
         elif isinstance(type, Subtraction):
@@ -25,8 +23,3 @@ class Result(object):
         else:
             raise TypeError("TYPE ERROR: Results can only be of type Operator. Found Type %s" % type.__class__)
         return self
-
-# Start from left, Start from right
-# At Evaluate, create result and return
-# merge left and right and return
-# at top log to message

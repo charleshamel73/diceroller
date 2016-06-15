@@ -7,12 +7,16 @@ from src.visitor.ValueCheckVisitor import ValueCheckVisitor
 class Parser(object):
     def parse(self,string):
         from NodeFactory import NodeFactory
-        #BEFORE COMPILE
+        print "ROLL '%s'"%string
+        print "PARSING STRING"
         root = NodeFactory.fetch_part(string)
+        print "CHECKING SYNTAX"
         root.accept(SyntaxVisitor)
-        #COMPILE
+        print "COMPILING"
         root.accept(CompileVisitor)
+        print "CHECKING VALUES"
         root.accept(ValueCheckVisitor)
-        #AFTER COMPILE
+        print "LOGGING RESULTS"
         test = root.accept(LogResultVisitor)
+        print ""
         return test.sum

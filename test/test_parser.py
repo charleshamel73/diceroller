@@ -45,7 +45,6 @@ class TestParser(TestCase):
         self.assertRaises(SyntaxError,lambda:parser.parse("3d-4"))
         self.assertRaises(SyntaxError,lambda:parser.parse("-3d4-4"))
 
-
     def test_mod(self,mocked_roll):
         parser = Parser()
         self.assertEqual(parser.parse("3d4"),9)
@@ -61,7 +60,4 @@ class TestParser(TestCase):
         self.assertRaises(ValueError, lambda: parser.parse("3d3k0L"))
         self.assertRaises(ValueError,lambda: parser.parse("3d3k4H"))
         self.assertRaises(ValueError, lambda: parser.parse("3d3r0k2L"))
-        self.assertRaises(ValueError, lambda: parser.parse("3d3k2Lr0"))
-
-    #TODO: ADD TEST FOR SORTED SUCH THAT 3L AND 5H
-    #TODO: ADD CUSTOM EXCEPTION CLASSES AND FIX TEST
+        self.assertRaises(SyntaxError, lambda: parser.parse("3d3k2Lr0"))

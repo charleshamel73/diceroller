@@ -24,10 +24,10 @@ class NodeFactory(object):
             return Divide(string)
         elif Multiply.symbol in string:
             return Multiply(string)
-        # elif Keep.symbol in string:
-        #     return Keep(string)
-        # elif Reroll.symbol in string:
-        #     return Reroll(string)
+        elif Keep.symbol in string:
+            return Keep(string)
+        elif Reroll.symbol in string:
+            return Reroll(string)
         elif Diceroll.symbol in string:
             return Diceroll(string)
         elif Highest.symbol in string:
