@@ -1,3 +1,5 @@
+slackbot
+slackclient
 mock
 unittest2
 nose2
