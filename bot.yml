@@ -1,4 +1,4 @@
-name: nodebot
+name: dicerollerbot
 description: A simple dice roller bot
 config:
   - name: SLACK_TEST_TOKEN
