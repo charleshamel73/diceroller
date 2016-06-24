@@ -17,19 +17,20 @@ class LogResultVisitor(NodeVisitor):
     @classmethod
     def visit(cls,node):
         if isinstance(node,Roll):
+            #TODO: Roll -> Keep overwrites message in result
+            #TODO: if message != "" add message instead of delete maybe??
             if isinstance(node, Reroll):
-                print ("Rerolled all %s and got %s with a sum of %s"
+                status = ("Rerolled all %s and got %s with a sum of %s"
                        % (node.reroll, node.rolls, node.get_sum_of_roll()))
             elif isinstance(node, Keep):
-                print ("Kept %s %s values and got %s with a sum of %s"
+                status = ("Kept %s %s values and got %s with a sum of %s"
                    % (node.keep_count, node.rightChild.__class__.__name__,node.rolls, node.get_sum_of_roll()))
             elif isinstance(node, Diceroll):
-                print ("Rolled '%s' and got %s with a sum of %s"%(node.string,node.rolls,node.get_sum_of_roll()))
-            return Result(node.get_sum_of_roll(), node.rolls)
+                status = ("Rolled '%s' and got %s with a sum of %s"%(node.string,node.rolls,node.get_sum_of_roll()))
+            return Result(node.get_sum_of_roll(), node.rolls,status)
         elif isinstance(node, Operator):
             resultLeft = node.left
             resultRight = node.right
-            resultLeft.merge_results(resultRight, node)
             verb = ""
             if isinstance(node,Addition):
                 verb = "Adding"
@@ -40,13 +41,15 @@ class LogResultVisitor(NodeVisitor):
             elif isinstance(node,Divide):
                 verb = "Dividing"
             if isinstance(node.rightChild,Number):
-                print "%s by %s to get a total value of %s"\
+                status = "%s by %s to get a total value of %s"\
                       %(verb, node.rightChild.getValue(), resultLeft.sum)
             elif isinstance(node.rightChild,Roll):
-                print "%s previous total by new roll to get %s" \
+                status = "%s previous total by new roll to get %s" \
                       % (verb, node.left.sum)
+            resultLeft.merge_results(resultRight, node,status)
             return resultLeft
         elif isinstance(node,Number):
+            #TODO: IF I TRACK PARENT I CAN OUTPUT STARTING AT ??
             return Result(node.getValue())
         elif isinstance(node, Modifier):
             print("LOG RESULT INFO: No Result to get from %s Node" % node.__class__.__name__)

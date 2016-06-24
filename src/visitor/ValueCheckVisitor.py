@@ -15,7 +15,7 @@ class ValueCheckVisitor(NodeVisitor):
                 raise ValueError(
                     "REROLL VALUE ERROR: Expected a Reroll Number less then the number of sides but found '%s'" % node.numberOfSides)
         if isinstance(node, Keep):
-            if node.keep_count > node.numberOfSides:
+            if node.keep_count > node.numberOfDice:
                 raise ValueError("REROLL VALUE ERROR: Expected a Keep Count less then the number of dice rolled but found '%s'" % node.numberOfSides)
         elif isinstance(node, Number):
             if node.getValue() <= 0:

@@ -1,6 +1,0 @@
-name: dicerollerbot
-description: A simple dice roller bot
-config:
-  - name: SLACK_TEST_TOKEN
-    friendly_name: SLACK_test_TOKEN
-    type: secret

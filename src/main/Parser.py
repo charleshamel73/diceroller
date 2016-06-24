@@ -20,4 +20,4 @@ class Parser(object):
         test = root.accept(LogResultVisitor)
         print "Result of Roll: %s"%test.sum
         print ""
-        return test.sum
+        return test
